@@ -1,0 +1,25 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="SpringbootDemo1Application" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+    <module name="springboot-demo1.main" />
+    <extension name="net.ashald.envfile">
+      <option name="IS_ENABLED" value="true" />
+      <option name="IS_SUBST" value="false" />
+      <option name="IS_PATH_MACRO_SUPPORTED" value="false" />
+      <option name="IS_IGNORE_MISSING_FILES" value="false" />
+      <option name="IS_ENABLE_EXPERIMENTAL_INTEGRATIONS" value="false" />
+      <ENTRIES>
+        <ENTRY IS_ENABLED="true" PARSER="runconfig" />
+        <ENTRY IS_ENABLED="true" PARSER="env" PATH="config.env" />
+      </ENTRIES>
+    </extension>
+    <option name="SPRING_BOOT_MAIN_CLASS" value="cn.hanlyjiang.springboot.springbootdemo1.SpringbootDemo1Application" />
+    <option name="ALTERNATIVE_JRE_PATH" />
+    <envs>
+      <env name="DB_USERNAME" value="osEnvUsername" />
+      <env name="DB_PASSWORD" value="osEnvPassword" />
+    </envs>
+    <method v="2">
+      <option name="Make" enabled="true" />
+    </method>
+  </configuration>
+</component>

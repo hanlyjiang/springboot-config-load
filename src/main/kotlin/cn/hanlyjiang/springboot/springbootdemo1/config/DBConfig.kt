@@ -11,4 +11,5 @@ class DBConfig {
 
     @Value("\${db.password}")
     lateinit var password: String
+
 }
