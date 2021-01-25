@@ -17,6 +17,7 @@
     <envs>
       <env name="DB_USERNAME" value="osEnvUsername" />
       <env name="DB_PASSWORD" value="osEnvPassword" />
+      <env name="BLOCKDATA_API_ENGINE_INTERNAL_URL" value="http://192.168.2.1:8080" />
     </envs>
     <method v="2">
       <option name="Make" enabled="true" />
