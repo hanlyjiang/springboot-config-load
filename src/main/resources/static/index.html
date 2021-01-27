@@ -6,5 +6,22 @@
 </head>
 <body>
 <h1>SpringBoot</h1>
+<p>
+    你好👋
+    <button type="button" id="doRequestBtn">点击按钮</button>
+</p>
+<script type="text/javascript">
+    document.getElementById("doRequestBtn").addEventListener("click", function () {
+        function reqListener() {
+            console.log(this.responseText);
+            window.alert(this.responseText)
+        }
+
+        var oReq = new XMLHttpRequest();
+        oReq.addEventListener("load", reqListener);
+        oReq.open("GET", "/name");
+        oReq.send();
+    })
+</script>
 </body>
 </html>
