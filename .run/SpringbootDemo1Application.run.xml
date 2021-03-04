@@ -19,6 +19,7 @@
       <env name="DB_PASSWORD" value="osEnvPassword" />
       <env name="BLOCKDATA_API_ENGINE_INTERNAL_URL" value="http://192.168.2.1:8080" />
       <env name="HASURA_GRAPHQL_JWT_SECRET" value="{&quot;type&quot;:&quot;HS256&quot;,&quot;key&quot;:&quot;1222223333344445555&quot;,&quot;claims_format&quot;:&quot;json&quot;}" />
+      <env name="SERVER_PORT" value="9090" />
     </envs>
     <method v="2">
       <option name="Make" enabled="true" />

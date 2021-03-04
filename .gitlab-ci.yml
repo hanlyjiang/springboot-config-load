@@ -1,0 +1,41 @@
+variables:
+  VERSION: $VERSION
+  SERVICE_NAME: $SERVICE_NAME
+  DOCKER_REGISTRY: zh-registry.geostar.com.cn
+  DOCKER_NAMESPACE: geopanel
+
+build:jar:
+  # 部分模块若不使用1.8编译会报错
+  image: gradle:alpine
+  stage: build
+  script:
+    - cp -f $CI_PROJECT_DIR/.settings.xml ~/.m2/settings.xml
+    - ./gradlew assemble
+    - mkdir _archiver
+    - cp build/libs/*.jar _archiver/
+  artifacts:
+    name: "dist-$CI_PROJECT_NAME-$CI_COMMIT_SHORT_SHA"
+    paths:
+      - _archiver/*.jar
+    # 生成的归档包比较大，我们只保留短时间
+    expire_in: 30 minutes
+  tags:
+    - common-build
+  only:
+    - gitlab-ci
+
+build:docker:
+  script:
+    - echo $HARBOR_PWD | docker login --username='robot$gitlab-ci' $DOCKER_REGISTRY --password-stdin
+    - git rev-parse HEAD >git-rev
+    - IMAGE_NAME=$SERVICE_NAME
+    - echo "Docker build options $DOCKER_OPTIONS, set DOCKER_OPTIONS to --no-cache force rebuild all stage"
+    - cp _archiver/*.jar docker/
+    - docker build $DOCKER_OPTIONS --build-arg JAR_FILE=$SERVICE_NAME-$VERSION.jar -t $IMAGE_NAME:$CI_COMMIT_SHORT_SHA ./docker/
+    - docker tag $IMAGE_NAME:$CI_COMMIT_SHORT_SHA $DOCKER_REGISTRY/$DOCKER_NAMESPACE/$IMAGE_NAME:$CI_COMMIT_SHORT_SHA
+    - docker push $DOCKER_REGISTRY/$DOCKER_NAMESPACE/$IMAGE_NAME:$CI_COMMIT_SHORT_SHA
+    - echo "镜像构建完成：$DOCKER_REGISTRY/$DOCKER_NAMESPACE/$IMAGE_NAME:$CI_COMMIT_SHORT_SHA"
+  tags:
+    - docker
+  only:
+    - gitlab-ci

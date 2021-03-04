@@ -4,7 +4,7 @@
 FROM zh-registry.geostar.com.cn/geopanel/openjdk-12-jdk-alpine3.9:20210111
 LABEL maintainer="jianghanghang@geostar.com.cn"
 
-ARG VERSION=v0.0.1
+ARG VERSION=0.0.1
 ARG JAR_FILE=springboot-demo1-0.0.1-SNAPSHOT.jar
 
 LABEL VERSION=$VERSION
@@ -22,6 +22,6 @@ WORKDIR /app
 #    && ca-certificates-java -f \
 #    &&
 
-EXPOSE 8443
+#EXPOSE 8080
 
 ENTRYPOINT ["java","-jar", "/app/app.jar"]
