@@ -19,4 +19,8 @@ class AppConfig {
     @Value("\${blockdata_api_engine.internal_url}")
     lateinit var blockApiEngineInternalUrl: String
 
+//    BLOCK_DATA_API_ENGINE_INTERNAL_URL
+    @Value("\${hasura.graphql.jwt_secret}")
+    lateinit var jwtSecret: String
+
 }
