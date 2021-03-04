@@ -9,7 +9,7 @@ build:jar:
   image: gradle:alpine
   stage: build
   script:
-    - cp -f $CI_PROJECT_DIR/.settings.xml ~/.m2/settings.xml
+#    - cp -f $CI_PROJECT_DIR/.settings.xml ~/.m2/settings.xml
     - ./gradlew assemble
     - mkdir _archiver
     - cp build/libs/*.jar _archiver/
