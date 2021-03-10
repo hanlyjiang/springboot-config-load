@@ -1,10 +1,12 @@
 package cn.hanlyjiang.springboot.springbootdemo1
 
+import com.alibaba.nacos.spring.context.annotation.config.NacosPropertySource
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
 import org.springframework.core.env.PropertySource
 
 @SpringBootApplication
+@NacosPropertySource(dataId = "example", autoRefreshed = true)
 class SpringbootDemo1Application {
 
 }

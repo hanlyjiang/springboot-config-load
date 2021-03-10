@@ -1,7 +1,10 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-    id("org.springframework.boot") version "2.4.1"
+    id("org.springframework.boot") version "2.3.9.RELEASE"
+    // nacos 暂不支持2.4+
+    // https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter
+//    id("org.springframework.boot") version "2.4.1"
     id("io.spring.dependency-management") version "1.0.10.RELEASE"
     kotlin("jvm") version "1.4.21"
     kotlin("plugin.spring") version "1.4.21"
@@ -21,6 +24,8 @@ dependencies {
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
+    // nacos配置管理
+    implementation("com.alibaba.boot:nacos-config-spring-boot-starter:0.2.7")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
 }
 
