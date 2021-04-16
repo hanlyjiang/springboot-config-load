@@ -41,3 +41,18 @@ tasks.withType<KotlinCompile> {
 tasks.withType<Test> {
     useJUnitPlatform()
 }
+
+// 拷贝生成物到docker目录
+tasks.create("prepareJarForDocker", Copy::class) {
+    println("创建任务：$name")
+
+    dependsOn("bootJar")
+    group = "docker"
+
+    from(File(project.buildDir, "libs"))
+    destinationDir = File(projectDir, "docker")
+
+    doLast {
+        println("复制文件jar文件完成")
+    }
+}

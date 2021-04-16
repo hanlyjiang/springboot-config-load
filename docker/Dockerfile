@@ -22,6 +22,6 @@ WORKDIR /app
 #    && ca-certificates-java -f \
 #    &&
 
-EXPOSE 8443
+EXPOSE 8080
 
 ENTRYPOINT ["java","-jar", "/app/app.jar"]
