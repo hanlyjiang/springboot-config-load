@@ -1,14 +1,14 @@
 package cn.hanlyjiang.springboot.springbootdemo1.controller
 
 import cn.hanlyjiang.springboot.springbootdemo1.config.AppConfig
+import com.alibaba.nacos.api.annotation.NacosInjected
 import com.alibaba.nacos.api.config.annotation.NacosValue
+import com.alibaba.nacos.api.naming.NamingService
+import com.alibaba.nacos.api.naming.pojo.Instance
 import org.apache.tomcat.util.json.JSONParser
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.RequestMethod
-import org.springframework.web.bind.annotation.ResponseBody
-import org.springframework.web.bind.annotation.RestController
+import org.springframework.web.bind.annotation.*
 import java.util.*
 
 
@@ -34,6 +34,9 @@ class ConfigReader {
         return JSONParser(appConfig.jwtSecret).parseObject()
     }
 
+    /*
+    nacos 配置管理
+     */
     @NacosValue(value = "\${useLocalCache:false}", autoRefreshed = true)
     private val useLocalCache = false
 
@@ -43,4 +46,18 @@ class ConfigReader {
         return useLocalCache
     }
 
+
+    /*
+    nacos服务发现
+     */
+    @NacosInjected
+    private lateinit var namingService: NamingService
+
+    // curl -v http://localhost:8080/config/getNacoService?serviceName=example
+    // curl -X PUT 'http://127.0.0.1:8848/nacos/v1/ns/instance?serviceName=example&ip=127.0.0.1&port=8080'
+    @RequestMapping(value = ["/getNacoService"], method = [RequestMethod.GET])
+    @ResponseBody
+    fun getNacoService(@RequestParam serviceName: String): List<Instance> {
+        return namingService.getAllInstances(serviceName);
+    }
 }

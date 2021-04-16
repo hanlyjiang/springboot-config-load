@@ -26,6 +26,8 @@ dependencies {
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
     // nacos配置管理
     implementation("com.alibaba.boot:nacos-config-spring-boot-starter:0.2.7")
+    // nacos服务发现
+    implementation("com.alibaba.boot:nacos-discovery-spring-boot-starter:0.2.7")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
 }
 
